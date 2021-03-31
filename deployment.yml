@@ -1,35 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloworld
+  name: f2ml-deploy
 spec:
+  replicas: 2
   selector:
     matchLabels:
-      app: helloworld
-  replicas: 1 
-  template: 
+      app: f2ml-deploy
+  template:
     metadata:
+      name: f2ml-deploy
       labels:
-        app: helloworld
+        app: f2ml-deploy
     spec:
       containers:
-      - name: helloworld
-        image: karthequian/helloworld:latest
+      - name: f2mlcontainer
+        image: f2mlregistryintegration.azurecr.io/nginx:latest
         ports:
         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: helloworld
+  name: f2ml-service
 spec:
- type: NodePort
- selector:
-   app: helloworld
- ports:
-   - name: client
-     protocol: TCP
-     port: 80
-     nodePort: 32080
- selector:
-   app: helloworld
+  type: LoadBalancer
+  loadBalancerIP: 40.68.85.241
+  ports:
+  - port: 80
+  selector:
+    app: f2ml-deploy
