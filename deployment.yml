@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: f2mlcontainer
-        image: f2mlregistryintegration.azurecr.io/nginx:latest
+        image: f2mlregistryintegration.azurecr.io/nginx:36
         ports:
         - containerPort: 80
 ---
