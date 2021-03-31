@@ -16,6 +16,7 @@ spec:
       containers:
       - name: f2mlcontainer
         image: f2mlregistryintegration.azurecr.io/nginx:latest
+        ports:
         - containerPort: 80
 ---
 apiVersion: v1
@@ -29,3 +30,4 @@ spec:
   - port: 80
   selector:
     app: f2ml-deploy
+
